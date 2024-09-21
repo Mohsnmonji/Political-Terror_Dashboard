@@ -77,7 +77,7 @@ This command will upload and deploy the Shiny app, making it accessible to anyon
 
 ## 6. Accessing the Deployed App
 
-The app van be accessed at:
+The app can be accessed at:
 
 [https://mohsnmonji.shinyapps.io/PTS_Trend/)
 
