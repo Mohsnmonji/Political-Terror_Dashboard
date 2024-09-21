@@ -1,6 +1,5 @@
 # ui.R
 
-# Load necessary libraries
 library(shiny)
 
 # Define the UI for the Shiny app
