@@ -10,7 +10,7 @@ the Political Science Department at the University of North Carolina, Asheville.
 - **PTS Source Selection**: Users can select from three PTS indicator provided by Amnesty International, Human Rights Watch, U.S. Department of State or view the average PTS score across these sources.
 - **Top 20 Countries**: The app also displays the countries with the highest year-over-year percentage change in average PTS.
 
-## Access the App
+### Access the App
 
 You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
 
@@ -27,7 +27,7 @@ You can access the app here: [Political Terror Scale App](https://mohsnmonji.shi
 | `Instructions.Rmd` | R Markdown file containing instructions on how to  run the code for the app. |
 | `Instructions.pdf` | PDF version of the instructions for run the code for the app. |
 
-## Dataset
+### Dataset
 
 The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 countries from 1976 to 2023. The scores are based on reports by three primary sources and include three indicators of political terror:
 
@@ -62,17 +62,17 @@ concept is also distinguishable from terrorism as a tactic or from criminal acts
 
 The PTS dataset is available for download from the [Political Terror Scale project website](http://www.politicalterrorscale.org/). Users can download the latest version of the PTS dataset directly from the website.
 
-## Data Citation
+### Data Citation
 
 Gibney, Mark, Peter Haschke, Daniel Arnon, Attilio Pisanò, Gray Barrett, Baekkwan Park, and Jennifer Barnes. 2024. *The Political Terror Scale 1976-2023*. Retrieved from the Political Terror Scale website: [http://www.politicalterrorscale.org](http://www.politicalterrorscale.org).
 
-## Codebook
+### Codebook
 
 The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the variables, coding procedures, and the methodology used in the Political Terror Scale dataset. 
 
 The codebook can be downloaded from this repository or from the [Political Terror Scale project website](http://www.politicalterrorscale.org/).
 
-## Calculation of Average PTS in this dashboard
+### Calculation of Average PTS in this dashboard
 
 The average **Political Terror Score (PTS)** in this dashboard is calculated by averaging the available scores from three sources: **PTS_A** (Amnesty International), **PTS_H** (Human Rights Watch), and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
 
@@ -84,10 +84,10 @@ The average **Political Terror Score (PTS)** in this dashboard is calculated by 
 This method ensures that the average is dynamically calculated depending on the availability of data from the different sources and handles missing values appropriately.
 
 
-## Instructions
+### Instructions
 
 For detailed instructions on how to clone, install, run, and deploy the app, please refer to the `Instructions.Rmd` or `Instructions.pdf` file in this repository.
 
-## License
+### License
 
 
