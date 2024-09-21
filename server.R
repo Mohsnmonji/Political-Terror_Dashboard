@@ -11,9 +11,20 @@ pts_data_clean <- pts_data %>%
   mutate(Year = as.numeric(as.character(Year))) %>% 
   filter(!is.na(Year))
 
-# Calculate average PTS using PTS_A, PTS_H, and PTS_S
+# Calculate average PTS dynamically based on available PTS values
 pts_data_clean <- pts_data_clean %>%
-  mutate(Average_PTS = rowMeans(cbind(PTS_A, PTS_H, PTS_S), na.rm = TRUE))
+  rowwise() %>%  # Ensure row-wise calculation
+  mutate(Average_PTS = case_when(
+    !is.na(PTS_A) & !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_H, PTS_S), na.rm = TRUE),  # All three available
+    !is.na(PTS_A) & !is.na(PTS_H) ~ mean(c(PTS_A, PTS_H), na.rm = TRUE),  # PTS_A and PTS_H available
+    !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),  # PTS_A and PTS_S available
+    !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_H, PTS_S), na.rm = TRUE),  # PTS_H and PTS_S available
+    !is.na(PTS_A) ~ PTS_A,  # Only PTS_A available
+    !is.na(PTS_H) ~ PTS_H,  # Only PTS_H available
+    !is.na(PTS_S) ~ PTS_S,  # Only PTS_S available
+    TRUE ~ NA_real_  # If none are available, set to NA
+  )) %>%
+  ungroup()  # Stop row-wise operation
 
 # Calculate year-over-year changes in average PTS score
 pts_data_clean <- pts_data_clean %>%
@@ -25,11 +36,13 @@ pts_data_clean <- pts_data_clean %>%
 average_changes <- pts_data_clean %>%
   group_by(Country) %>%
   summarise(Average_Change = mean(PTS_Change, na.rm = TRUE)) %>%
-  arrange(desc(Average_Change))
+  mutate(Average_Change_Percent = Average_Change * 100) %>%  # Convert to percentage
+  arrange(desc(Average_Change_Percent))
 
-# Get the top 20 countries by average year-over-year change
+# Get the top 20 countries by average year-over-year change in percentage
 top_20_countries <- average_changes %>%
-  top_n(20, wt = Average_Change)
+  top_n(20, wt = Average_Change_Percent)
+
 
 # Get unique lists of countries and regions
 country_list <- unique(pts_data_clean$Country)
@@ -82,37 +95,53 @@ shinyServer(function(input, output, session) {
     }
   })
   
-  # Render the trend plot
-  output$trendPlot <- renderPlot({
+ # Render the trend plot
+output$trendPlot <- renderPlot({
     trend_data <- filtered_data()
     
+    # Customize the PTS type labels
+    pts_label <- switch(input$pts_type,
+                        "Average_PTS" = "Average PTS",
+                        "PTS_A" = "PTS-A",
+                        "PTS_H" = "PTS-H",
+                        "PTS_S" = "PTS-S")
+    
     if (nrow(trend_data) > 0) {
-      ggplot(trend_data, aes(x = Year, y = PTS)) +
-        geom_line(color = "red", size = 1.2) +
-        geom_point(color = "red", size = 3) +
-        labs(
-          title = ifelse(input$trend_type == "Country", 
-                         paste("Trend of", input$pts_type, "Political Terror Scale for", input$country, "(1976-2023)"),
-                         ifelse(input$trend_type == "Region", 
-                                paste("Trend of", input$pts_type, "Political Terror Scale in", region_labels[input$region], "Region (1976-2023)"),
-                                paste("Global Trend of", input$pts_type, "Political Terror Scale (1976-2023)"))),
-          x = "Year", y = paste(input$pts_type, "PTS Score")
-        ) +
-        theme_minimal()
+        # Base ggplot structure
+        plot <- ggplot(trend_data, aes(x = Year, y = PTS)) +
+          geom_line(color = "red", size = 1.2) +
+          geom_point(color = "red", size = 3) +
+          labs(
+            title = ifelse(input$trend_type == "Country", 
+                           paste("Trend in", pts_label, "for", input$country, "(1976-2023)"),
+                           ifelse(input$trend_type == "Region", 
+                                  paste("Trend in", pts_label, "in", region_labels[input$region], "Region (1976-2023)"),
+                                  paste("Global Trend in", pts_label, "(1976-2023)"))),
+            x = "Year", 
+            y = paste(pts_label, "Score")
+          ) +
+          theme_minimal()
+        
+        # Apply specific scale for PTS_H to ensure integer years on x-axis
+        if (input$pts_type == "PTS_H") {
+            plot <- plot + scale_x_continuous(breaks = scales::pretty_breaks(n = 10))  # Set appropriate breaks
+        }
+        
+        print(plot)
     } else {
-      ggplot() + 
-        annotate("text", x = 1, y = 1, label = "No data available for this selection", size = 5, color = "red") +
-        theme_void()
+        ggplot() + 
+          annotate("text", x = 1, y = 1, label = "No data available for this selection", size = 5, color = "red") +
+          theme_void()
     }
-  })
-  
-  # Render the Top 20 Countries plot
-  output$topCountriesPlot <- renderPlot({
-    ggplot(top_20_countries, aes(x = reorder(Country, Average_Change), y = Average_Change)) +
-      geom_bar(stat = "identity", fill = "darkgreen") +  # Change bar color to dark green
-      coord_flip() +
-      labs(title = "Countries with Highest Year-over-Year Change in Average PTS",
-           x = "Country", y = " Year-over-Year Change in Average PTS") +
-      theme_minimal()
-  })
+})
+
+# Render the Top 20 Countries plot
+output$topCountriesPlot <- renderPlot({
+  ggplot(top_20_countries, aes(x = reorder(Country, Average_Change_Percent), y = Average_Change_Percent)) +
+    geom_bar(stat = "identity", fill = "darkgreen") +  # Change bar color to dark green
+    coord_flip() +
+    labs(title = "Countries with Highest Year-over-Year Percentage Change in Average PTS",
+         x = "Country", y = "Year-over-Year Percentage Change (%)") +  # Reflect that y-axis is in percentage
+    theme_minimal()
+})
 })
