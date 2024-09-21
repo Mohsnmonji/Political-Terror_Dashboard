@@ -41,9 +41,9 @@ If you prefer to run the app locally, follow these steps:
 
 The dataset (`PTS-2024.csv`) contains Political Terror Scores for countries from 1976 to 2023. The scores are based on three primary indicators:
 
-- **PTS_A**: Amnesty International reports
-- **PTS_H**: U.S. State Department reports on human rights
-- **PTS_S**: State-level terror reports
+- **PTS_A**: Amnesty International: The State of the Worlds’ Human Rights (URL: latest report)
+- **PTS_H**: Human Rights Watch: World Report (URL: latest report)
+- **PTS_S**: US Department of State: Country Reports on Human Rights Practices (URL: latest report)
 
 The app calculates the average PTS score using these three indicators, excluding missing values.
 
