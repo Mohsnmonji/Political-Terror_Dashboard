@@ -13,14 +13,13 @@ This repository contains the code and data for the **Political Terror Scale** In
 
 You can access the live version of the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
 
-Here is the updated section with the `server.R` and `ui.R` files included:
-
 ### Files Included
 
 | Filename         | Description                                 |
 |------------------|---------------------------------------------|
 | `PTS_Trend_Code.R`| Combined R script for the Shiny app, including both UI and server logic. |
 | `PTS-2024.csv`   | The dataset containing Political Terror Scores from 1976-2023. |
+| `PTS-Codebook-V220.pdf` | Codebook providing details on the variables, coding, and methodology used in the Political Terror Scale dataset. It can be downloaded from this repository or from the [Political Terror Scale website](http://www.politicalterrorscale.org/). |
 | `README.md`      | This README file, containing project details.  |
 | `server.R`       | The server logic file for the Shiny app, handling reactive programming, data filtering, and plotting. |
 | `ui.R`           | The user interface (UI) script for the Shiny app, defining layout and controls for user interaction. |
