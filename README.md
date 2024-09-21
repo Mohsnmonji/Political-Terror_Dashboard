@@ -1,14 +1,12 @@
 
 # Political Terror Scale (PTS) Dashboard
 
-This repository contains the code for the **Political Terror Scale Dashboard**. The dashboard allows users to explore trends in Political Terror Score (PTS) for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on the PTS Dataset provided by the Political Terror Scale (PTS) project, a data collection project at
-the Political Science Department at the University of North Carolina, Asheville.
+This repository contains the code for the **Political Terror Scale Dashboard**. The dashboard allows users to explore trends in political terror scores for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on the PTS Dataset provided by the Political Terror Scale (PTS) project, a data collection project at the Political Science Department at the University of North Carolina, Asheville.
 
 ## Features
 
 - **Dynamic Country, Region, and Global Selection**: Users can choose to view trends for specific countries, regions, or global averages.
 - **PTS Source Selection**: Users can select from three PTS indicator provided by Amnesty International, Human Rights Watch, U.S. Department of State or view the average PTS score across these sources.
-- **Top 20 Countries**: The app also displays the countries with the highest year-over-year percentage change in average PTS.
 
 ### Access the App
 
@@ -24,12 +22,12 @@ You can access the app here: [Political Terror Scale App](https://mohsnmonji.shi
 | `README.md`      | README file, containing project details. |
 | `server.R`       | The server logic file for the Shiny app, handling reactive programming, data filtering, and plotting. |
 | `ui.R`           | The user interface (UI) script for the Shiny app, defining layout and controls for user interaction. |
-| `Instructions.Rmd` | R Markdown file containing instructions on how to  run the code for the app. |
-| `Instructions.pdf` | PDF version of the instructions for run the code for the app. |
+| `Instructions.Rmd` | R Markdown file containing instructions on how to  run the R code for the app. |
+| `Instructions.pdf` | PDF version of the instructions for running the R code for the app. |
 
 ### Dataset
 
-The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 countries from 1976 to 2023. The scores are based on reports by three primary sources and include three indicators of political terror:
+The dataset (`PTS-2024.csv`) contains political terror scores for over 200 countries and 7 geographic regions from 1976 to 2023. The scores are based on reports by three primary sources and include three indicators of political terror:
 
 - **PTS_A**: Amnesty International
     - [Amnesty International: The State of the World's Human Rights](https://amnesty.ca/reports/2024-annual-global-report/?gad_source=1&gclid=Cj0KCQjw3bm3BhDJARIsAKnHoVX7eatPE_Ipefq3HJ_Lg6RDd6AQm16fAs-oRFjs78dZlGzSltESmscaAuDaEALw_wcB)
@@ -40,7 +38,7 @@ The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 count
 
 The PTS team  assign a score ranging from 0 (no violations) to 5 (severe violations) to each country based on reports from the above-mentioned sources to provide a general measure of political terror in each country.As the PTS project team reminds, it is important to understand political terror as:
 
-Each source assigns a score ranging from 0 (no violations) to 5 (severe violations) to provide a general measure of political terror in each country. As the PTS project team reminds, it is important to understand political terror as:
+Each source assigns a score ranging from 0 to 5 to provide a general measure of political terror in each country. As the PTS project team reminds, it is important to understand political terror as:
 
 > "... violations of basic human rights
 to the physical integrity of the person by agents of the state within the territorial boundaries of the state
