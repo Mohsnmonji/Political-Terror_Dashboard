@@ -81,7 +81,6 @@ The average **Political Terror Score (PTS)** in this dashboard is calculated by 
 
 This method ensures that the average is dynamically calculated depending on the availability of data from the different sources and handles missing values appropriately.
 
-
 ### Instructions
 
 For instructions on how to run the R code for the app, please refer to the `Instructions.Rmd` or `Instructions.pdf` file in this repository.
