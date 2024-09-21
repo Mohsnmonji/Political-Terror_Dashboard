@@ -12,7 +12,7 @@ the Political Science Department at the University of North Carolina, Asheville.
 
 ## Access the App
 
-You can access the live version of the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
+You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
 
 ### Files Included
 
