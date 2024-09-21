@@ -44,6 +44,33 @@ The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the 
 
 Users can download the codebook from this repository or from the [Political Terror Scale website](http://www.politicalterrorscale.org/).
 
+## Calculation of Average PTS
+
+The average **Political Terror Score (PTS)** is calculated by averaging the available scores from three sources: **PTS_A** (Amnesty International), **PTS_H** (Human Rights Watch), and **PTS_S** (U.S. Department of State). The logic used for calculating the average PTS is as follows:
+
+1. If all three scores are available (PTS_A, PTS_H, PTS_S), the average is calculated using all three.
+2. If only two scores are available, the average is calculated using the two available scores.
+3. If only one score is available, that score is used as the PTS.
+4. If none of the scores are available, the PTS is set to `NA`.
+
+This logic ensures that the average is dynamically calculated depending on the availability of data from the different sources and handles missing values appropriately.
+
+```r
+# Logic for calculating average PTS
+pts_data_clean <- pts_data_clean %>%
+  rowwise() %>%
+  mutate(Average_PTS = case_when(
+    !is.na(PTS_A) & !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_H, PTS_S), na.rm = TRUE),
+    !is.na(PTS_A) & !is.na(PTS_H) ~ mean(c(PTS_A, PTS_H), na.rm = TRUE),
+    !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),
+    !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_H, PTS_S), na.rm = TRUE),
+    !is.na(PTS_A) ~ PTS_A,
+    !is.na(PTS_H) ~ PTS_H,
+    !is.na(PTS_S) ~ PTS_S,
+    TRUE ~ NA_real_
+  ))
+```
+
 ## Instructions
 
 For detailed instructions on how to clone, install, run, and deploy the app, please refer to the `Instructions.Rmd` or `Instructions.pdf` file in this repository.
@@ -51,5 +78,3 @@ For detailed instructions on how to clone, install, run, and deploy the app, ple
 ## License
 
 
-
----
