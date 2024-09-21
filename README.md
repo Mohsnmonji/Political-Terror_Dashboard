@@ -1,7 +1,7 @@
 
 # Political Terror Scale (PTS) Trend Dashboard
 
-This repository contains the code for the **Political Terror Scale Dashboard**. The dashboard allows users to explore trends in Political Terror Scores (PTS) for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on the PTS Dataset provided by the Political Terror Scale (PTS) project, a data collection project at
+This repository contains the code for the **Political Terror Scale Dashboard**. The dashboard allows users to explore trends in Political Terror Score (PTS) for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on the PTS Dataset provided by the Political Terror Scale (PTS) project, a data collection project at
 the Political Science Department at the University of North Carolina, Asheville.
 
 ## Features
@@ -38,15 +38,27 @@ The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 count
 - **PTS_S**: U.S. Department of State
     - [U.S. Department of State: Country Reports on Human Rights Practices](https://preview.state.gov/reports/2023-country-reports-on-human-rights-practices/)
 
-Each source assigns a score ranging from 0 (no violations) to 5 (severe violations) to provide a general measure of political terror in each country.As the PTS project team reminds, it is important to understand political terror as:
+The PTS team  assign a score ranging from 0 (no violations) to 5 (severe violations) to each country based on reports from the above-mentioned sources to provide a general measure of political terror in each country.As the PTS project team reminds, it is important to understand political terror as:
 
-Each source assigns a score ranging from 0 (no violations) to 5 (severe violations) to provide a general measure of political terror in each country. As the PTS project team reminds, it is important to understand the scores as:
+Each source assigns a score ranging from 0 (no violations) to 5 (severe violations) to provide a general measure of political terror in each country. As the PTS project team reminds, it is important to understand political terror as:
 
 > "... violations of basic human rights
 to the physical integrity of the person by agents of the state within the territorial boundaries of the state
 in question in a particular year. It is important to note that political terror as defined by the PTS is
 not synonymous with terrorism or the use of violence and intimidation in pursuit of political aims. The
 concept is also distinguishable from terrorism as a tactic or from criminal acts."(Gibney et al., 2024)
+
+### Coding Scheme in the Political Terror Scale 
+
+| Level | Description                                                                                                                                                                                |
+|-------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1     | Countries under a secure rule of law, people are not imprisoned for their views, and torture is rare or exceptional. Political murders are extremely rare.                                   |
+| 2     | There is a limited amount of imprisonment for nonviolent political activity. However, few persons are affected, torture and beatings are exceptional. Political murder is rare.              |
+| 3     | There is extensive political imprisonment, or a recent history of such imprisonment. Execution or other political murders and brutality may be common. Unlimited detention, with or without a trial, for political views is accepted. |
+| 4     | Civil and political rights violations have expanded to large numbers of the population. Murders, disappearances, and torture are a common part of life. Despite its generality, on this level, terror primarily affects those who engage in politics or ideas. |
+| 5     | The terrors of Level 4 have been extended to the whole population. The leaders of these societies place no limits on the means or thoroughness with which they pursue personal or ideological goals. |
+
+### Access to the PTS dataset 
 
 The PTS dataset is available for download from the [Political Terror Scale project website](http://www.politicalterrorscale.org/). Users can download the latest version of the PTS dataset directly from the website.
 
