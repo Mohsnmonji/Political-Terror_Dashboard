@@ -6,7 +6,7 @@ This repository contains the R code and data used to build the **Political Terro
 ## Features
 
 - **Dynamic Country, Region, and Global Selection**: Users can choose to view trends for specific countries, regions, or global averages.
-- **PTS Source Selection**: Users can select from three different PTS indicators based on reports by Amnesty International, Human Rights Watch, U.S. Department of State or view the average PTS score across over the yers.
+- **PTS Source Selection**: Users can select from three different PTS indicators based on reports by Amnesty International, Human Rights Watch,and the U.S. Department of State or view the average PTS score across over the yers.
 
 ### Access the App
 
