@@ -1,96 +1,58 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 
 ```markdown
 ---
-title: "Instructions for Running and Deploying the PTS Trend Dashboard"
+title: "Source Code for the PTS Trend Dashboard"
 author: "Mohsen Monji"
 output: html_document
 ---
 
 # Overview
 
-This document provides instructions for cloning, running, and deploying the Political Terror Scale (PTS) Trend Dashboard Shiny app. Follow the steps below to set up and run the app locally, and deploy it to ShinyApps.io if needed.
+This document provides details on the source code for the Political Terror Scale (PTS) Trend Dashboard. The purpose of this document is to outline how to access and understand the code. For those interested in exploring the app code or making contributions, follow the steps below.
 
-## 1. Clone the Repository
+## 1. Access the Source Code
 
-To begin, clone the repository to your local machine using the following command in your terminal:
+The source code for the PTS Trend Dashboard can be found in the GitHub repository. Clone the repository using the following command:
 
 ```bash
 git clone https://github.com/Mohsnmonji/Trend-in-Average-Political-Terror-Scale.git
 ```
 
-## 2. Install Necessary R Packages
+This repository contains all necessary files, including the R scripts, data used to build the dashboard.
 
-Before running the app, you need to ensure that the required R packages are installed. You can install the necessary packages by running the following R code:
+## 2. Key R Packages
+
+The app relies on the following R packages, which must be installed to run the code locally:
 
 ```r
 install.packages(c("shiny", "ggplot2", "dplyr"))
 ```
 
-These packages are essential for the Shiny app, data manipulation, and plotting.
+These packages are essential for Shiny app development, data manipulation, and plotting.
 
-## 3. Set Working Directory
+## 3. Main Files and Structure
 
-Set your R working directory to the location where you cloned the repository. You can do this by running the following code in R:
+The key files in the repository are:
 
-```r
-setwd("/path/to/PoliticalTerrorScale")
-```
+- **PTS_Trend_Code.R**: The primary R script for running the Shiny app. This script contains the UI and server logic for generating the dashboard.
+- **PTS-2024.csv**: The dataset used by the app to display trends in Political Terror Scale scores.
 
-Replace `"/path/to/PoliticalTerrorScale"` with the actual path to the cloned repository on your system.
+## 4. Running the App for Development
 
-## 4. Run the App Locally
-
-After setting the working directory, you can run the app locally using the `shiny::runApp()` function in R. This will launch the app in your web browser.
+To modify or explore the app code, set your working directory to the cloned repository and run the app locally in R:
 
 ```r
+setwd("/path/to/Trend-in-Average-Political-Terror-Scale")
 shiny::runApp('PTS_Trend_Code.R')
 ```
 
-This command will start the Shiny app, allowing you to explore Political Terror Score trends interactively on your local machine.
+Replace `"/path/to/Trend-in-Average-Political-Terror-Scale"` with the actual path to the cloned repository on your machine.
 
-## 5. Deploying the App on ShinyApps.io
+## 5. Contribution
 
-If you want to deploy the app to ShinyApps.io for public access, follow these steps:
-
-### 5.1 Set Up ShinyApps.io Account
-
-First, set up your ShinyApps.io account with the following R code. Replace `'your_username'`, `'YOUR_TOKEN'`, and `'YOUR_SECRET'` with the appropriate account details, which you can obtain from the ShinyApps.io dashboard.
-
-```r
-rsconnect::setAccountInfo(name = 'your_username', token = 'YOUR_TOKEN', secret = 'YOUR_SECRET')
-```
-
-### 5.2 Deploy the App
-
-Once your account is configured, deploy the app with the following command:
-
-```r
-rsconnect::deployApp(appDir = getwd())
-```
-
-This command will upload and deploy the Shiny app, making it accessible to anyone with the link to your ShinyApps.io page.
-
-## 6. Accessing the Deployed App
-
-The app can be accessed at:
-
-[https://mohsnmonji.shinyapps.io/PTS_Trend/)
-
-## Troubleshooting
-
-- If the app does not run, ensure all necessary R packages are installed and the dataset `PTS-2024.csv` is located in the correct directory.
-- For issues with deployment, verify that your ShinyApps.io account details are correct and you have sufficient space and resources on your account.
-
-## License
-
+If you wish to contribute to the development of the app, feel free to fork the repository and submit pull requests with your enhancements or bug fixes. You can also raise issues or suggestions directly on the GitHub page.
 
 ---
 
-By following these instructions, you can run the Political Terror Scale Trend Dashboard locally or deploy it for online access.
-
-
+By following these steps, you can access and modify the PTS Trend Dashboard's source code for research, learning, or development purposes.
+```
