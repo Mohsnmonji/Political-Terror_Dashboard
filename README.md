@@ -70,11 +70,10 @@ The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the 
 
 The codebook can be downloaded from this repository or from the [Political Terror Scale project website](http://www.politicalterrorscale.org/).
 
-### Calculation of Average PTS in this dashboard
 
 ### Calculation of Average PTS in this Dashboard
 
-The average **Political Terror Score (PTS)** in this dashboard is calculated by averaging the available scores from two sources: **PTS_A** (Amnesty International) and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
+The **average political terror score** in this dashboard is calculated by averaging the available scores from two sources: **PTS_A** (Amnesty International) and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
 
 1. If both scores (**PTS_A** and **PTS_S**) are available, the average is calculated using these two scores.
 2. If only one score (**PTS_A** or **PTS_S**) is available, that score is used as the PTS.
