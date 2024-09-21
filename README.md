@@ -1,7 +1,7 @@
 
 # Political Terror Scale (PTS) Dashboard
 
-# Political Terror Scale - Shiny App
+# Political Terror Scale
 
 This repository contains the code and data for the **Political Terror Scale** Shiny application. The app allows users to explore trends in Political Terror Scores (PTS) for various countries from 1976 to 2023. 
 
@@ -36,6 +36,18 @@ If you prefer to run the app locally, follow these steps:
     ```r
     shiny::runApp("app.R")
     ```
+
+### Files Included
+
+| Filename         | Description                                 |
+|------------------|---------------------------------------------|
+| `Gitshinny.Rproj`| RStudio project file for the Shiny app.      |
+| `PTS-2024.csv`   | The dataset containing Political Terror Scores from 1976-2023. |
+| `README.md`      | The README file containing project details.  |
+| `newapp.R`       | Main R script for the Shiny app (deprecated).|
+| `server.R`       | The server logic file for the Shiny app.     |
+| `ui.R`           | The user interface (UI) script for the Shiny app. |
+
 
 ## Dataset
 
