@@ -73,16 +73,13 @@ The codebook can be downloaded from this repository or from the [Political Terro
 
 ### Calculation of Average PTS in this Dashboard
 
-The **average political terror score** in this dashboard is calculated by averaging the available scores from two sources: **PTS_A** (Amnesty International) and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
+The **average political terror score** in this dashboard is calculated by averaging scores from two indicators: **PTS_A** (Amnesty International) and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
 
 1. If both scores (**PTS_A** and **PTS_S**) are available, the average is calculated using these two scores.
 2. If only one score (**PTS_A** or **PTS_S**) is available, that score is used as the PTS.
 3. If neither score is available, the PTS is set to `NA`.
 
 This method ensures that the average is dynamically calculated based on the availability of data from **Amnesty International** and the **U.S. Department of State**, handling missing values appropriately.
-
-
-This method ensures that the average is dynamically calculated depending on the availability of data from the different sources and handles missing values appropriately.
 
 ### Instructions
 
