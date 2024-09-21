@@ -1,102 +1,74 @@
 
 # Political Terror Scale (PTS) Dashboard
 
-This repository contains the code and data for the **Political Terror Scale** Interactive Dashboard. The Dashboard allows users to explore trends in Political Terror Scores (PTS) for various countries from 1976 to 2023. 
+This repository contains the code and data for the **Political Terror Scale** Interactive Dashboard. The dashboard allows users to explore trends in Political Terror Scores (PTS) for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on reports from Amnesty International, Human Rights Watch, and the U.S. Department of State.
 
 ## Features
 
-- **Dynamic Country Selection**: Choose any country to visualize the trend in Political Terror Score over time.
+- **Dynamic Country, Region, and Global Selection**: Users can choose to view trends for specific countries, regions, or global averages.
+- **PTS Source Selection**: Users can select from multiple PTS sources (Amnesty International, Human Rights Watch, U.S. Department of State) or view the average score across these sources.
+- **Top 20 Countries**: The app also displays the countries with the highest year-over-year percentage change in average PTS.
 
 ## Access the App
 
 You can access the live version of the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
 
-
 ### Files Included
 
 | Filename         | Description                                 |
 |------------------|---------------------------------------------|
-| `Gitshinny.Rproj`| RStudio project file for the Shiny app.      |
+| `PTS_Trend_Code.R`| Combined R script for the Shiny app, including both UI and server logic. |
 | `PTS-2024.csv`   | The dataset containing Political Terror Scores from 1976-2023. |
-| `README.md`      | The README file containing project details.  |
-| `newapp.R`       | Main R script for the Shiny app.|
-| `server.R`       | The server logic file for the Shiny app.     |
-| `ui.R`           | The user interface (UI) script for the Shiny app. |
-
+| `README.md`      | This README file, containing project details.  |
 
 ## Dataset
 
 The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 countries from 1976 to 2023. The scores are based on reports by three primary sources:
 
-- **PTS_A**: Amnesty International: The State of the Worlds’ Human Rights (URL: latest report)
-- **PTS_H**: Human Rights Watch: World Report (URL: latest report)
-- **PTS_S**: US Department of State: Country Reports on Human Rights Practices (URL: latest report)
+- **PTS_A**: Amnesty International
+- **PTS_H**: Human Rights Watch
+- **PTS_S**: U.S. Department of State
 
-The app calculates the average PTS score using these three indicators, excluding missing values.
-
-## Methodology
-
-- The average Political Terror Score (PTS) for each year and country is calculated as:
-
-    ```r
-    Average_PTS = rowMeans(cbind(PTS_A, PTS_H, PTS_S), na.rm = TRUE)
-    ```
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
-
-
-## Overview
-
-This project is a Shiny app that allows users to explore  trends in the average **Political Terror Scale (PTS)** for various countries from 1976 to 2023. The app enables users to select a country from a dropdown menu and view the trend in the average Political Terror Score over time.
-
-### Political Terror Scale (PTS)
-
-The Political Terror Scale (PTS) measures the levels of physical integrity rights violations across countries. The scores are based on annual reports from **Amnesty International**, **Human Rights Watch** and the **US Department of State**, providing a numerical measure of state-sponsored terror and human rights violations.
-
-### Features
-
-- Select a country from a dropdown menu.
-- View the trend of average Political Terror Score (PTS) for the selected country from 1976 to 2023.
-- The PTS is calculated as the average of three separate measures:
-  - PTS_A: Amnesty International's report score.
-  - PTS_H: Human Rights Watch score.
-  - PTS_S: U.S. State Department score.
-
-## Dataset
-
-The dataset `PTS-2024.csv` includes PTS scores for multiple countries and regions. The dataset includes the following columns:
-
-- **Country**: Name of the country.
-- **Year**: The year for which the PTS score is recorded.
-- **PTS_A**: Amnesty International score.
-- **PTS_H**: Human Rights Watch score.
-- **PTS_S**: U.S. State Department score.
-- **Region**: The geographical region of the country.
-- **Other metadata**: Metadata for regions, codes, and NA statuses.
+Each source assigns a score ranging from 0 (no violations) to 5 (severe violations), and the average score across sources is used to provide a general measure of political terror in each country.
 
 ### Calculation of Average PTS
 
-The **average PTS score** is calculated by taking the mean of the available scores from the three sources (PTS_A, PTS_H, PTS_S) for each country-year:
+The average Political Terror Score (PTS) for each country-year is calculated using the following methodology:
 
 ```r
+# Calculate the average PTS score dynamically based on available values
 pts_data_clean <- pts_data_clean %>%
-  mutate(Average_PTS = rowMeans(cbind(PTS_A, PTS_H, PTS_S), na.rm = TRUE))
+  rowwise() %>%
+  mutate(Average_PTS = case_when(
+    !is.na(PTS_A) & !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_H, PTS_S), na.rm = TRUE),
+    !is.na(PTS_A) & !is.na(PTS_H) ~ mean(c(PTS_A, PTS_H), na.rm = TRUE),
+    !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),
+    !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_H, PTS_S), na.rm = TRUE),
+    !is.na(PTS_A) ~ PTS_A,
+    !is.na(PTS_H) ~ PTS_H,
+    !is.na(PTS_S) ~ PTS_S,
+    TRUE ~ NA_real_
+  ))
 ```
 
-Missing values are handled using `na.rm = TRUE`, ensuring that only available scores contribute to the average.
+This calculation ensures that the average score is computed dynamically, depending on the availability of data from different sources, and handles missing values (`NA`) appropriately.
 
-## Shiny App
+## Shiny App Features
 
-The Shiny app allows users to interact with the dataset and visualize the trend of the average Political Terror Score over time. The app includes the following functionalities:
+The Shiny app allows users to explore trends in Political Terror Scores using the following features:
 
-- A **dropdown menu** to select a country.
-- A **plot** that displays the trend of the average PTS score over time for the selected country.
-- The trend is displayed using a **red line** and **red points** to highlight the data points.
+- **Country and Region Selection**: Users can select a country or a region to view the trend in PTS over time (from 1976 to 2023).
+- **Global Trend View**: A global average trend can be displayed, aggregating scores from all countries.
+- **Interactive Plots**: The app displays line plots for selected countries or regions, with the ability to choose from different PTS sources (Amnesty International, Human Rights Watch, U.S. Department of State).
+- **Top 20 Countries**: The app also highlights the top 20 countries with the highest year-over-year percentage change in PTS, providing insights into rapid changes in political terror.
 
-## Installation
+### Plot Customization
+
+- **Trend Plot**: The trend plot visualizes the selected PTS data with a red line and red points to emphasize data points. It updates dynamically based on the user's selection of country, region, or global scope.
+  
+- **Top 20 Countries Plot**: A bar chart shows the top 20 countries with the highest year-over-year percentage change in average PTS. The countries are ranked and displayed with green bars.
+
+## Installation and Running the App
 
 To run the Shiny app locally, follow these steps:
 
@@ -107,7 +79,7 @@ To run the Shiny app locally, follow these steps:
 
 2. Install necessary packages in R:
    ```r
-   install.packages(c("shiny", "ggplot2", "dplyr", "rsconnect"))
+   install.packages(c("shiny", "ggplot2", "dplyr"))
    ```
 
 3. Set your working directory to the project folder:
@@ -115,27 +87,31 @@ To run the Shiny app locally, follow these steps:
    setwd("/path/to/PoliticalTerrorScale")
    ```
 
-4. Run the app:
+4. Run the app using the following R command:
    ```r
-   shiny::runApp()
+   shiny::runApp('PTS_Trend_Code.R')
    ```
 
 ## Deployment
 
-The Shiny app is deployed at [ShinyApps.io](https://mohsnmonji.shinyapps.io/PTS_Trend/). You can visit the live version of the app using the link provided.
+The Shiny app can be deployed on [ShinyApps.io](https://mohsnmonji.shinyapps.io/PTS_Trend/). To deploy the app yourself, use the following steps:
 
-To deploy the app yourself:
-```r
-rsconnect::setAccountInfo(name = 'your_username', token = 'YOUR_TOKEN', secret = 'YOUR_SECRET')
-rsconnect::deployApp(appDir = getwd())
-```
+1. Set up your ShinyApps.io account with the following R code:
+   ```r
+   rsconnect::setAccountInfo(name = 'your_username', token = 'YOUR_TOKEN', secret = 'YOUR_SECRET')
+   ```
+
+2. Deploy the app:
+   ```r
+   rsconnect::deployApp(appDir = getwd())
+   ```
 
 ## Contributing
 
-Contributions to the project are welcome. Please create a pull request or open an issue to discuss changes.
+Contributions are welcome! If you have suggestions or improvements, feel free to open an issue or create a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is open-source and available under the MIT License. Please see the [LICENSE](LICENSE) file for details.
 
----
+--- 
