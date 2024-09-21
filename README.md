@@ -63,11 +63,11 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ## Overview
 
-This project is a Shiny app that allows users to explore the trend of the **Political Terror Scale (PTS)** for various countries from 1976 to 2023. The app enables users to select a country from a dropdown menu and view the trend of the average Political Terror Score over time.
+This project is a Shiny app that allows users to explore  trends in the average **Political Terror Scale (PTS)** for various countries from 1976 to 2023. The app enables users to select a country from a dropdown menu and view the trend in the average Political Terror Score over time.
 
 ### Political Terror Scale (PTS)
 
-The Political Terror Scale (PTS) measures the levels of physical integrity rights violations across countries. The scores are based on annual reports from **Amnesty International** and the **U.S. State Department**, providing a numerical measure of state-sponsored terror and human rights violations.
+The Political Terror Scale (PTS) measures the levels of physical integrity rights violations across countries. The scores are based on annual reports from **Amnesty International**, **Human Rights Watch** and the **US Department of State**, providing a numerical measure of state-sponsored terror and human rights violations.
 
 ### Features
 
