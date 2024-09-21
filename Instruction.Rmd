@@ -55,12 +55,12 @@ shiny::runApp('PTS_Trend_Code.R')
 
 Replace `"/path/to/Trend-in-Average-Political-Terror-Scale"` with the actual path to the cloned repository on your machine.
 
+
+By following these steps, you can access and modify the PTS Trend Dashboard's source code for research, learning, or development purposes.
+
 ## 5. Contribution
 
 If you wish to contribute to the development of the app, feel free to fork the repository and submit pull requests with your enhancements or bug fixes. You can also raise issues or suggestions directly on the GitHub page.
 
----
-
-By following these steps, you can access and modify the PTS Trend Dashboard's source code for research, learning, or development purposes.
 
 
