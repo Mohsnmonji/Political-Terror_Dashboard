@@ -1,14 +1,11 @@
 
 # Political Terror Scale (PTS) Dashboard
 
-# Political Terror Scale
-
-This repository contains the code and data for the **Political Terror Scale** Shiny application. The app allows users to explore trends in Political Terror Scores (PTS) for various countries from 1976 to 2023. 
+This repository contains the code and data for the **Political Terror Scale** Interactive Dashboard. The Dashboard allows users to explore trends in Political Terror Scores (PTS) for various countries from 1976 to 2023. 
 
 ## Features
 
-- **Dynamic Country Selection**: Choose any country to visualize the trend of its average Political Terror Score over time.
-- **Interactive Plot**: Displays the average score trend for the selected country from 1976 to 2023.
+- **Dynamic Country Selection**: Choose any country to visualize the trend in Political Terror Score over time.
 
 ## Access the App
 
