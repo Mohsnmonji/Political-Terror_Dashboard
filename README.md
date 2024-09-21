@@ -11,28 +11,6 @@ This repository contains the code and data for the **Political Terror Scale** In
 
 You can access the live version of the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/Political_Terror_Scale/)
 
-## Running Locally
-
-If you prefer to run the app locally, follow these steps:
-
-1. Clone the repository to your local machine:
-
-    ```bash
-    git clone https://github.com/YOUR_USERNAME/PoliticalTerrorScale.git
-    ```
-
-2. Open the project in RStudio.
-3. Install the required R packages:
-
-    ```r
-    install.packages(c("shiny", "ggplot2", "dplyr"))
-    ```
-
-4. Run the app:
-
-    ```r
-    shiny::runApp("app.R")
-    ```
 
 ### Files Included
 
@@ -48,7 +26,7 @@ If you prefer to run the app locally, follow these steps:
 
 ## Dataset
 
-The dataset (`PTS-2024.csv`) contains Political Terror Scores for countries from 1976 to 2023. The scores are based on three primary indicators:
+The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 countries from 1976 to 2023. The scores are based on reports by three primary sources:
 
 - **PTS_A**: Amnesty International: The State of the Worlds’ Human Rights (URL: latest report)
 - **PTS_H**: Human Rights Watch: World Report (URL: latest report)
