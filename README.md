@@ -1,6 +1,66 @@
 
 # Political Terror Scale (PTS) Dashboard
 
+# Political Terror Scale - Shiny App
+
+This repository contains the code and data for the **Political Terror Scale** Shiny application. The app allows users to explore trends in Political Terror Scores (PTS) for various countries from 1976 to 2023. 
+
+## Features
+
+- **Dynamic Country Selection**: Choose any country to visualize the trend of its average Political Terror Score over time.
+- **Interactive Plot**: Displays the average score trend for the selected country from 1976 to 2023.
+
+## Access the App
+
+You can access the live version of the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/NewApp/)
+
+## Running Locally
+
+If you prefer to run the app locally, follow these steps:
+
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/PoliticalTerrorScale.git
+    ```
+
+2. Open the project in RStudio.
+3. Install the required R packages:
+
+    ```r
+    install.packages(c("shiny", "ggplot2", "dplyr"))
+    ```
+
+4. Run the app:
+
+    ```r
+    shiny::runApp("app.R")
+    ```
+
+## Dataset
+
+The dataset (`PTS-2024.csv`) contains Political Terror Scores for countries from 1976 to 2023. The scores are based on three primary indicators:
+
+- **PTS_A**: Amnesty International reports
+- **PTS_H**: U.S. State Department reports on human rights
+- **PTS_S**: State-level terror reports
+
+The app calculates the average PTS score using these three indicators, excluding missing values.
+
+## Methodology
+
+- The average Political Terror Score (PTS) for each year and country is calculated as:
+
+    ```r
+    Average_PTS = rowMeans(cbind(PTS_A, PTS_H, PTS_S), na.rm = TRUE)
+    ```
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+
+
 ## Overview
 
 This project is a Shiny app that allows users to explore the trend of the **Political Terror Scale (PTS)** for various countries from 1976 to 2023. The app enables users to select a country from a dropdown menu and view the trend of the average Political Terror Score over time.
