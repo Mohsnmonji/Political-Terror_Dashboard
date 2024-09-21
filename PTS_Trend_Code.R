@@ -1,5 +1,3 @@
-# PTS_Trend_Code.R
-
 # Load necessary libraries
 library(shiny)
 library(dplyr)
@@ -13,16 +11,12 @@ pts_data_clean <- pts_data %>%
   mutate(Year = as.numeric(as.character(Year))) %>%
   filter(!is.na(Year))
 
-# Calculate average PTS dynamically based on available PTS values
+# Calculate average PTS dynamically based on available PTS_A and PTS_S values
 pts_data_clean <- pts_data_clean %>%
   rowwise() %>%
   mutate(Average_PTS = case_when(
-    !is.na(PTS_A) & !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_H, PTS_S), na.rm = TRUE),
-    !is.na(PTS_A) & !is.na(PTS_H) ~ mean(c(PTS_A, PTS_H), na.rm = TRUE),
     !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),
-    !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_H, PTS_S), na.rm = TRUE),
     !is.na(PTS_A) ~ PTS_A,
-    !is.na(PTS_H) ~ PTS_H,
     !is.na(PTS_S) ~ PTS_S,
     TRUE ~ NA_real_
   )) %>%
@@ -62,7 +56,7 @@ region_labels <- c(
 
 # Define the UI for the Shiny app
 ui <- fluidPage(
-  titlePanel("Trends in Political Terror Scale (1976-2023)"),
+  titlePanel("Trends in Political Terror (1976-2023)"),
   
   tags$head(
     tags$style(HTML("
@@ -90,11 +84,11 @@ ui <- fluidPage(
           The Political Terror Scale (PTS) measures violations of physical integrity rights carried out by states or their agents. 
           The scale ranges from 0 to 5, with higher scores indicating more severe violations. 
           Reports are based on annual assessments from Amnesty International, Human Rights Watch, and the US Department of State. 
-          The PTS dataset covers over 200 countries or territories from 1976 to 2023. 
+          The PTS dataset covers over 200 countries or territories and 7 regions from 1976 to 2023. 
           For more information, see: 
           <a href='http://www.politicalterrorscale.org/' target='_blank'>Political Terror Scale</a>.
         </p>
-        <p><strong>Interactive Trend Dashboard created by Mohsen Monji</strong></p>")
+        <p><strong>Interactive Dashboard created by Mohsen Monji</strong></p>")
            )
     )
   ),
@@ -174,7 +168,7 @@ server <- function(input, output, session) {
                         "PTS_S" = "PTS-S")
     
     if (nrow(trend_data) > 0) {
-      ggplot(trend_data, aes(x = Year, y = PTS)) +
+      p <- ggplot(trend_data, aes(x = Year, y = PTS)) +
         geom_line(color = "red", size = 1.2) +
         geom_point(color = "red", size = 3) +
         labs(
@@ -188,12 +182,24 @@ server <- function(input, output, session) {
         ) +
         theme_minimal()
       
+      # Use different scales for the X-axis based on the selected PTS type
+      if (input$pts_type == "PTS_H") {
+        # Display every year for PTS_H
+        p <- p + scale_x_continuous(breaks = seq(min(trend_data$Year, na.rm = TRUE), max(trend_data$Year, na.rm = TRUE), by = 1))
+      } else {
+        # Display every 10 years for PTS_A, PTS_S, and Average_PTS
+        p <- p + scale_x_continuous(breaks = seq(min(trend_data$Year, na.rm = TRUE), max(trend_data$Year, na.rm = TRUE), by = 10))
+      }
+      
+      print(p)
+      
     } else {
       ggplot() + 
         annotate("text", x = 1, y = 1, label = "No data available for this selection", size = 5, color = "red") +
         theme_void()
     }
   })
+  
   
   # Render the Top 20 Countries plot
   output$topCountriesPlot <- renderPlot({

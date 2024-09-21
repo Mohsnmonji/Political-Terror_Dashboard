@@ -1,11 +1,12 @@
 # ui.R
+
+# Load necessary libraries
 library(shiny)
 
 # Define the UI for the Shiny app
 fluidPage(
-  titlePanel("Trends in Political Terror Scale (1976-2023)"),
+  titlePanel("Trends in Political Terror (1976-2023)"),
   
-  # Add description of the dashboard with fading effect
   tags$head(
     tags$style(HTML("
       .fade-in-text {
@@ -32,33 +33,29 @@ fluidPage(
           The Political Terror Scale (PTS) measures violations of physical integrity rights carried out by states or their agents. 
           The scale ranges from 0 to 5, with higher scores indicating more severe violations. 
           Reports are based on annual assessments from Amnesty International, Human Rights Watch, and the US Department of State. 
-          The PTS dataset covers over 200 countries or territories from 1976 to 2023. 
+          The PTS dataset covers over 200 countries or territories and 7 regions from 1976 to 2023. 
           For more information, see: 
           <a href='http://www.politicalterrorscale.org/' target='_blank'>Political Terror Scale</a>.
         </p>
-        <p><strong>Interactive Trend Dashboard created by Mohsen Monji</strong></p>")
+        <p><strong>Interactive Dashboard created by Mohsen Monji</strong></p>")
            )
     )
   ),
   
-  # Sidebar and main panel layout
   sidebarLayout(
     sidebarPanel(
       selectInput("trend_type", "Select Trend Type:", choices = c("Country", "Region", "Global")),
       
-      # Conditional panel for country-specific selection
       conditionalPanel(
         condition = "input.trend_type == 'Country'",
-        selectInput("country", "Select Country:", choices = NULL)  # Populated in server.R
+        selectInput("country", "Select Country:", choices = NULL)  # Populated in server
       ),
       
-      # Conditional panel for region-specific selection
       conditionalPanel(
         condition = "input.trend_type == 'Region'",
-        selectInput("region", "Select Region:", choices = NULL)  # Populated in server.R
+        selectInput("region", "Select Region:", choices = NULL)  # Populated in server
       ),
       
-      # Dropdown to select the type of Political Terror Score with descriptive labels
       selectInput("pts_type", "Select PTS Type:", 
                   choices = c("Average" = "Average_PTS", 
                               "PTS_A: Amnesty International" = "PTS_A", 
@@ -71,7 +68,7 @@ fluidPage(
     
     mainPanel(
       plotOutput("trendPlot"),
-      plotOutput("topCountriesPlot")  # Space for Top 20 Countries plot
+      plotOutput("topCountriesPlot")
     )
   )
 )
