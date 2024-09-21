@@ -35,7 +35,6 @@ The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 count
 Each source assigns a score ranging from 0 (no violations) to 5 (severe violations), and the average score across sources is used to provide a general measure of political terror in each country.
 
 The dataset used in this app is available for download from the [Political Terror Scale website](http://www.politicalterrorscale.org/). Users can download the latest version of the dataset directly from the website.
-Here is the updated section with the addition of a "Codebook" section:
 
 ## Codebook
 
