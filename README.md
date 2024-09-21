@@ -10,7 +10,7 @@ This repository contains the code for the **Political Terror Scale Dashboard**. 
 
 ### Access the App
 
-You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
+You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/Trend_Political_Terror/)
 
 ### Files Included
 

@@ -20,7 +20,7 @@ This document provides details on the source code for the Political Terror Scale
 The source code for the PTS Trend Dashboard can be found in the GitHub repository. Clone the repository using the following command:
 
 ```bash
-git clone https://github.com/Mohsnmonji/Trend-in-Average-Political-Terror-Scale.git
+git clone https://github.com/Mohsnmonji/Trends-in-Political-Terror-1976-2023-.git
 ```
 
 This repository contains all necessary files, including the R scripts, data used to build the dashboard.
