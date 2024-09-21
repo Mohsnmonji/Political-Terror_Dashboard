@@ -44,7 +44,7 @@ If you prefer to run the app locally, follow these steps:
 | `Gitshinny.Rproj`| RStudio project file for the Shiny app.      |
 | `PTS-2024.csv`   | The dataset containing Political Terror Scores from 1976-2023. |
 | `README.md`      | The README file containing project details.  |
-| `newapp.R`       | Main R script for the Shiny app (deprecated).|
+| `newapp.R`       | Main R script for the Shiny app.|
 | `server.R`       | The server logic file for the Shiny app.     |
 | `ui.R`           | The user interface (UI) script for the Shiny app. |
 
