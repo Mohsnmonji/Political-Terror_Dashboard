@@ -1,5 +1,5 @@
 
-# Political Terror Scale (PTS) Dashboard
+# Political Terror Scale (PTS) Trend Dashboard(1976-2023)
 
 This repository contains the code and data for the **Political Terror Scale** Interactive Dashboard. The dashboard allows users to explore trends in Political Terror Scores (PTS) for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on reports from Amnesty International, Human Rights Watch, and the U.S. Department of State.
 
