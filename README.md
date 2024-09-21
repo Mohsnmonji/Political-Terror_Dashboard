@@ -13,6 +13,8 @@ This repository contains the code and data for the **Political Terror Scale** In
 
 You can access the live version of the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/PTS_Trend/)
 
+Here is the updated section with the `server.R` and `ui.R` files included:
+
 ### Files Included
 
 | Filename         | Description                                 |
@@ -20,6 +22,10 @@ You can access the live version of the app here: [Political Terror Scale App](ht
 | `PTS_Trend_Code.R`| Combined R script for the Shiny app, including both UI and server logic. |
 | `PTS-2024.csv`   | The dataset containing Political Terror Scores from 1976-2023. |
 | `README.md`      | This README file, containing project details.  |
+| `server.R`       | The server logic file for the Shiny app, handling reactive programming, data filtering, and plotting. |
+| `ui.R`           | The user interface (UI) script for the Shiny app, defining layout and controls for user interaction. |
+
+Here is the revised section with the hyperlink to the Political Terror Scale website, along with instructions on downloading the dataset:
 
 ## Dataset
 
@@ -30,6 +36,8 @@ The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 count
 - **PTS_S**: U.S. Department of State
 
 Each source assigns a score ranging from 0 (no violations) to 5 (severe violations), and the average score across sources is used to provide a general measure of political terror in each country.
+
+The dataset used in this app is available for download from the [Political Terror Scale website](http://www.politicalterrorscale.org/). Users can download the latest version of the dataset directly from the website.
 
 ### Calculation of Average PTS
 
