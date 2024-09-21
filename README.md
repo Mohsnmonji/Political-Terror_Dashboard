@@ -81,23 +81,8 @@ The average **Political Terror Score (PTS)** in this dashboard is calculated by 
 3. If only one score is available, that score is used as the PTS.
 4. If none of the scores are available, the PTS is set to `NA`.
 
-This logic ensures that the average is dynamically calculated depending on the availability of data from the different sources and handles missing values appropriately.
+This method ensures that the average is dynamically calculated depending on the availability of data from the different sources and handles missing values appropriately.
 
-```r
-# Logic for calculating average PTS
-pts_data_clean <- pts_data_clean %>%
-  rowwise() %>%
-  mutate(Average_PTS = case_when(
-    !is.na(PTS_A) & !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_H, PTS_S), na.rm = TRUE),
-    !is.na(PTS_A) & !is.na(PTS_H) ~ mean(c(PTS_A, PTS_H), na.rm = TRUE),
-    !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),
-    !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_H, PTS_S), na.rm = TRUE),
-    !is.na(PTS_A) ~ PTS_A,
-    !is.na(PTS_H) ~ PTS_H,
-    !is.na(PTS_S) ~ PTS_S,
-    TRUE ~ NA_real_
-  ))
-```
 
 ## Instructions
 
