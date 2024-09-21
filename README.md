@@ -122,7 +122,7 @@ To run the Shiny app locally, follow these steps:
 
 ## Deployment
 
-The Shiny app is deployed at [ShinyApps.io](https://YOUR_APP_LINK). You can visit the live version of the app using the link provided.
+The Shiny app is deployed at [ShinyApps.io](https://mohsnmonji.shinyapps.io/PTS_Trend/). You can visit the live version of the app using the link provided.
 
 To deploy the app yourself:
 ```r
