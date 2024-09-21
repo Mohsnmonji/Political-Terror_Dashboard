@@ -1,10 +1,4 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 
-```markdown
 ---
 title: "Source Code for the PTS Trend Dashboard"
 author: "Mohsen Monji"
