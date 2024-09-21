@@ -25,8 +25,6 @@ Here is the updated section with the `server.R` and `ui.R` files included:
 | `server.R`       | The server logic file for the Shiny app, handling reactive programming, data filtering, and plotting. |
 | `ui.R`           | The user interface (UI) script for the Shiny app, defining layout and controls for user interaction. |
 
-Here is the revised section with the hyperlink to the Political Terror Scale website, along with instructions on downloading the dataset:
-
 ## Dataset
 
 The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 countries from 1976 to 2023. The scores are based on reports by three primary sources:
