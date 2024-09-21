@@ -23,6 +23,8 @@ You can access the live version of the app here: [Political Terror Scale App](ht
 | `README.md`      | This README file, containing project details.  |
 | `server.R`       | The server logic file for the Shiny app, handling reactive programming, data filtering, and plotting. |
 | `ui.R`           | The user interface (UI) script for the Shiny app, defining layout and controls for user interaction. |
+| `Instructions.Rmd` | R Markdown file containing detailed instructions on how to install, run, and deploy the app. |
+| `Instructions.pdf` | PDF version of the instructions for installation, running, and deploying the app. |
 
 ## Dataset
 
@@ -40,88 +42,14 @@ The dataset used in this app is available for download from the [Political Terro
 
 The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the variables, coding procedures, and the methodology used in the Political Terror Scale dataset. 
 
-Users can download the codebook from this repository or from the [Political Terror Scale website](http://www.politicalterrorscale.org/). 
-### Calculation of Average PTS
+Users can download the codebook from this repository or from the [Political Terror Scale website](http://www.politicalterrorscale.org/).
 
-The average Political Terror Score (PTS) for each country-year is calculated using the following method:
+## Instructions
 
-```r
-# Calculate the average PTS score dynamically based on available values
-pts_data_clean <- pts_data_clean %>%
-  rowwise() %>%
-  mutate(Average_PTS = case_when(
-    !is.na(PTS_A) & !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_H, PTS_S), na.rm = TRUE),
-    !is.na(PTS_A) & !is.na(PTS_H) ~ mean(c(PTS_A, PTS_H), na.rm = TRUE),
-    !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),
-    !is.na(PTS_H) & !is.na(PTS_S) ~ mean(c(PTS_H, PTS_S), na.rm = TRUE),
-    !is.na(PTS_A) ~ PTS_A,
-    !is.na(PTS_H) ~ PTS_H,
-    !is.na(PTS_S) ~ PTS_S,
-    TRUE ~ NA_real_
-  ))
-```
-
-This calculation ensures that the average score is computed dynamically, depending on the availability of data from different sources, and handles missing values (`NA`) appropriately.
-
-## Shiny App Features
-
-The Shiny app allows users to explore trends in Political Terror Scores using the following features:
-
-- **Country and Region Selection**: Users can select a country or a region to view the trend in PTS over time (from 1976 to 2023).
-- **Global Trend View**: A global average trend can be displayed, aggregating scores from all countries.
-- **Interactive Plots**: The app displays line plots for selected countries or regions, with the ability to choose from different PTS sources (Amnesty International, Human Rights Watch, U.S. Department of State).
-- **Top 20 Countries**: The app also highlights the top 20 countries with the highest year-over-year percentage change in PTS, providing insights into rapid changes in political terror.
-
-### Plot Customization
-
-- **Trend Plot**: The trend plot visualizes the selected PTS data with a red line and red points to emphasize data points. It updates dynamically based on the user's selection of country, region, or global scope.
-  
-- **Top 20 Countries Plot**: A bar chart shows the top 20 countries with the highest year-over-year percentage change in average PTS. The countries are ranked and displayed with green bars.
-
-## Installation and Running the App
-
-To run the Shiny app locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your_username/PoliticalTerrorScale.git
-   ```
-
-2. Install necessary packages in R:
-   ```r
-   install.packages(c("shiny", "ggplot2", "dplyr"))
-   ```
-
-3. Set your working directory to the project folder:
-   ```r
-   setwd("/path/to/PoliticalTerrorScale")
-   ```
-
-4. Run the app using the following R command:
-   ```r
-   shiny::runApp('PTS_Trend_Code.R')
-   ```
-
-## Deployment
-
-The Shiny app can be deployed on [ShinyApps.io](https://mohsnmonji.shinyapps.io/PTS_Trend/). To deploy the app yourself, use the following steps:
-
-1. Set up your ShinyApps.io account with the following R code:
-   ```r
-   rsconnect::setAccountInfo(name = 'your_username', token = 'YOUR_TOKEN', secret = 'YOUR_SECRET')
-   ```
-
-2. Deploy the app:
-   ```r
-   rsconnect::deployApp(appDir = getwd())
-   ```
-
-## Contributing
-
-Contributions are welcome! If you have suggestions or improvements, feel free to open an issue or create a pull request.
+For detailed instructions on how to clone, install, run, and deploy the app, please refer to the `Instructions.Rmd` or `Instructions.pdf` file in this repository.
 
 ## License
 
-This project is open-source and available under the MIT License. Please see the [LICENSE](LICENSE) file for details.
 
---- 
+
+---
