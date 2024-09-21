@@ -32,8 +32,11 @@ You can access the live version of the app here: [Political Terror Scale App](ht
 The dataset (`PTS-2024.csv`) contains Political Terror Scores for over 200 countries from 1976 to 2023. The scores are based on reports by three primary sources and include three indicators of political terror:
 
 - **PTS_A**: Amnesty International
+    - [Amnesty International: The State of the World's Human Rights](https://amnesty.ca/reports/2024-annual-global-report/?gad_source=1&gclid=Cj0KCQjw3bm3BhDJARIsAKnHoVX7eatPE_Ipefq3HJ_Lg6RDd6AQm16fAs-oRFjs78dZlGzSltESmscaAuDaEALw_wcB)
 - **PTS_H**: Human Rights Watch
+    - [Human Rights Watch: World Report](https://www.hrw.org/world-report/2024)
 - **PTS_S**: U.S. Department of State
+    - [U.S. Department of State: Country Reports on Human Rights Practices](https://preview.state.gov/reports/2023-country-reports-on-human-rights-practices/)
 
 Each source assigns a score ranging from 0 (no violations) to 5 (severe violations) to provide a general measure of political terror in each country.As the PTS project team reminds, it is important to understand political terror as:
 
@@ -55,9 +58,9 @@ Gibney, Mark, Peter Haschke, Daniel Arnon, Attilio Pisanò, Gray Barrett, Baekkw
 
 The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the variables, coding procedures, and the methodology used in the Political Terror Scale dataset. 
 
-Users can download the codebook from this repository or from the [Political Terror Scale project website](http://www.politicalterrorscale.org/).
+The codebook can be downloaded from this repository or from the [Political Terror Scale project website](http://www.politicalterrorscale.org/).
 
-## Calculation of Average PTS
+## Calculation of Average PTS in this dashboard
 
 The average **Political Terror Score (PTS)** in this dashboard is calculated by averaging the available scores from three sources: **PTS_A** (Amnesty International), **PTS_H** (Human Rights Watch), and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
 
