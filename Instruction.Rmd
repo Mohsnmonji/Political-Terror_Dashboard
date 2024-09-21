@@ -2,7 +2,9 @@
 ---
 title: "Source Code for the PTS Trend Dashboard"
 author: "Mohsen Monji"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 # Overview
