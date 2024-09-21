@@ -1,9 +1,13 @@
 
-```
-Title: Source Code for the PTS Trend Dashboard"
-Author: "Mohsen Monji"
+```yaml
+---
+title: "Source Code for the PTS Trend Dashboard"
+author: "Mohsen Monji"
+output:
+  pdf_document: default
+  html_document: default
+---
 
-```
 # Overview
 
 This document provides details on the source code for the Political Terror Scale (PTS) Trend Dashboard. The purpose of this document is to outline how to access and understand the code. For those interested in exploring the app code or making contributions, follow the steps below.
@@ -16,7 +20,7 @@ The source code for the PTS Trend Dashboard can be found in the GitHub repositor
 git clone https://github.com/Mohsnmonji/Trends-in-Political-Terror-1976-2023-.git
 ```
 
-This repository contains all necessary files, including the R scripts, data used to build the dashboard.
+This repository contains all necessary files, including the R scripts and data used to build the dashboard.
 
 ## 2. Key R Packages
 
@@ -53,4 +57,5 @@ If you wish to contribute to the development of the app, feel free to fork the r
 ---
 
 By following these steps, you can access and modify the PTS Trend Dashboard's source code for research, learning, or development purposes.
-```
+
+
