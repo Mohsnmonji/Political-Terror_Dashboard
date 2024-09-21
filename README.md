@@ -43,7 +43,7 @@ The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the 
 Users can download the codebook from this repository or from the [Political Terror Scale website](http://www.politicalterrorscale.org/). 
 ### Calculation of Average PTS
 
-The average Political Terror Score (PTS) for each country-year is calculated using the following methodology:
+The average Political Terror Score (PTS) for each country-year is calculated using the following method:
 
 ```r
 # Calculate the average PTS score dynamically based on available values
