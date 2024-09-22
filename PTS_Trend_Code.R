@@ -4,12 +4,10 @@ library(dplyr)
 library(plotly)
 library(ggplot2)
 
-# Load the dataset (ensure it's in the correct directory as your Shiny app)
-
+# Load and preprocess the dataset
 pts_data <- read.csv("PTS-2024.csv", 
                      fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
 
-# Clean and preprocess data
 pts_data_clean <- pts_data %>%
   mutate(Year = as.numeric(as.character(Year))) %>%
   filter(!is.na(Year))
@@ -25,41 +23,15 @@ region_labels <- c(
   "ssa" = "Sub-Saharan Africa"
 )
 
-# Calculate average PTS dynamically based on available PTS_A and PTS_S values
-pts_data_clean <- pts_data_clean %>%
-  rowwise() %>%
-  mutate(Average_PTS = case_when(
-    !is.na(PTS_A) & !is.na(PTS_S) ~ mean(c(PTS_A, PTS_S), na.rm = TRUE),
-    !is.na(PTS_A) ~ PTS_A,
-    !is.na(PTS_S) ~ PTS_S,
-    TRUE ~ NA_real_
-  )) %>%
-  ungroup()
-
-# Calculate the average PTS for each country over the available years
-average_pts_over_time <- pts_data_clean %>%
-  group_by(Country) %>%
-  summarise(Average_PTS = mean(Average_PTS, na.rm = TRUE)) %>%
-  arrange(desc(Average_PTS))
-
-# Get the top 20 countries by average PTS over time
-top_20_countries <- average_pts_over_time %>%
-  top_n(20, wt = Average_PTS)
-
-# Get unique lists of countries and regions
-country_list <- unique(pts_data_clean$Country)
-region_list <- unique(pts_data_clean$Region)
-
-# Define UI for the Shiny app
+# Define UI and server logic in one file
 ui <- fluidPage(
-  titlePanel(div(class = "fade-in-text", "Trend in Political Terror")),
+  titlePanel(div(class = "fade-in-text", "Trends in Political Terror (1976-2023)")),
   
   tags$head(
     tags$style(HTML("
       .fade-in-text {
         opacity: 0;
         animation: fadeIn 5s forwards;
-      
         font-size: 16px;
       }
       @keyframes fadeIn {
@@ -97,25 +69,24 @@ ui <- fluidPage(
       
       conditionalPanel(
         condition = "input.trend_type == 'Country'",
-        selectInput("country", "Select Country:", choices = sort(unique(pts_data_clean$Country)))  # Populate with countries
+        selectInput("country", "Select Country:", choices = NULL)  # Will be populated dynamically
       ),
       
       conditionalPanel(
         condition = "input.trend_type == 'Region'",
-        selectInput("region", "Select Region:", choices = setNames(names(region_labels), region_labels))  # Display region labels
+        selectInput("region", "Select Region:", choices = NULL)  # Will be populated dynamically
       ),
       
       selectInput("pts_type", "Select PTS Type:", 
-                  choices = c("Average" = "Average_PTS", 
-                              "PTS_A: Amnesty International" = "PTS_A", 
-                              "PTS_H: Human Rights Watch" = "PTS_H", 
-                              "PTS_S: US Department of State" = "PTS_S"), 
-                  selected = "Average_PTS"),
+                  choices = c("PTS: Amnesty International" = "PTS_A", 
+                              "PTS: Human Rights Watch" = "PTS_H", 
+                              "PTS: US Department of State" = "PTS_S"), 
+                  selected = "PTS_A"),
       
       sliderInput("year_range", "Select Year Range:",
-                  min = min(pts_data_clean$Year, na.rm = TRUE),
-                  max = max(pts_data_clean$Year, na.rm = TRUE),
-                  value = c(min(pts_data_clean$Year), max(pts_data_clean$Year)),
+                  min = 1976,
+                  max = 2023,
+                  value = c(1976, 2023),
                   step = 1, sep = "")
     ),
     
@@ -126,8 +97,36 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic
 server <- function(input, output, session) {
+  
+  # Populate country and region selection
+  updateSelectInput(session, "country", choices = sort(unique(pts_data_clean$Country)))
+  updateSelectInput(session, "region", choices = setNames(names(region_labels), region_labels))
+  
+  # Dynamic title generation based on the trend type and selected country/region
+  dynamic_trend_title <- reactive({
+    trend_type <- input$trend_type
+    
+    if (trend_type == "Country") {
+      paste("Trend in Political Terror for", input$country, "(", input$year_range[1], "-", input$year_range[2], ")")
+    } else if (trend_type == "Region") {
+      paste("Trend in Political Terror for", region_labels[[input$region]], "(", input$year_range[1], "-", input$year_range[2], ")")
+    } else {
+      paste("Global Trend in Political Terror", "(", input$year_range[1], "-", input$year_range[2], ")")
+    }
+  })
+  
+  # Dynamic y-axis label based on selected PTS type
+  dynamic_yaxis_label <- reactive({
+    pts_label <- input$pts_type
+    if (pts_label == "PTS_A") {
+      return("Political Terror Score (Amnesty International)")
+    } else if (pts_label == "PTS_H") {
+      return("Political Terror Score (Human Rights Watch)")
+    } else {
+      return("Political Terror Score (US Department of State)")
+    }
+  })
   
   # Filter data based on trend type (Global, Region, Country), PTS type, and year range
   filtered_data <- reactive({
@@ -172,15 +171,16 @@ server <- function(input, output, session) {
                    marker = list(color = 'red')  # Set marker color to red
       ) %>%
         layout(
-          title = list(text = "Trend in Political Terror", font = list(size = 12, bold = TRUE, color = 'darkgreen')),  # Set title bold, blue, and size 12
+          title = list(text = paste("<b>", dynamic_trend_title(), "</b>"), font = list(size = 14, color = 'darkgreen')),  # Dynamic title with bold and darkgreen
           xaxis = list(title = "Year"),
           yaxis = list(
-            title = "PTS Score"
+            title = dynamic_yaxis_label()  # Dynamic y-axis label based on PTS type
           ),
           hovermode = "x unified",  # Unified hover mode
           margin = list(l = 50, r = 50, t = 100, b = 100),  # Add margins for better layout
           showlegend = FALSE
-        )
+        ) %>%
+        config(displayModeBar = FALSE)  # Disable plot zooming options
       
       return(p)
     } else {
@@ -190,18 +190,20 @@ server <- function(input, output, session) {
     }
   })
   
-  
-  
-  # Render the Top 20 Countries plot based on Average PTS
+  # Render the Top 20 Countries plot based on available PTS types
   output$topCountriesPlot <- renderPlot({
+    top_20_countries <- pts_data_clean %>%
+      group_by(Country) %>%
+      summarise(Average_PTS = mean(PTS_A, na.rm = TRUE)) %>%  # Example: using Amnesty International PTS for top 20
+      top_n(20, wt = Average_PTS) %>%
+      arrange(desc(Average_PTS))
+    
     ggplot(top_20_countries, aes(x = reorder(Country, Average_PTS), y = Average_PTS)) +
       geom_bar(stat = "identity", fill = "darkgreen") +
       coord_flip() +
-      labs(title = "Countries with Highest Average PTS (1976-2023)",
-           x = "Country", y = "Average PTS Score") +
-      theme_minimal()
-  })
-}
-
-# Run the application 
-shinyApp(ui = ui, server = server)
+      labs(title = "Countries with Highest Political Terror Score (1976-2023)",
+           x = "Country", y = "Political Terror Score") +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(face = "bold"),  # Bold title
+        axis.title.y = element_text(face = "bold
