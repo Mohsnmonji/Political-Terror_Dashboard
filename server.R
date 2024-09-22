@@ -3,10 +3,18 @@ library(dplyr)
 library(plotly)
 library(ggplot2)
 
-# Load and preprocess the dataset
+# Load  the dataset
+pts_data <- read.csv("PTS-2024.csv",fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
+
+# Clean the data
 pts_data_clean <- pts_data %>%
   mutate(Year = as.numeric(as.character(Year))) %>%
-  filter(!is.na(Year))
+  filter(!is.na(Year)) %>%
+  mutate(
+    PTS_A = ifelse(PTS_A >= 1 & PTS_A <= 5, PTS_A, NA),  # Amnesty International PTS values 1-5, others NA
+    PTS_H = ifelse(PTS_H >= 1 & PTS_H <= 5, PTS_H, NA),  # Human Rights Watch PTS values 1-5, others NA
+    PTS_S = ifelse(PTS_S >= 1 & PTS_S <= 5, PTS_S, NA)   # US Department of State PTS values 1-5, others NA
+  )
 
 # Define region labels
 region_labels <- c(
