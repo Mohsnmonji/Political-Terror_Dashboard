@@ -1,9 +1,9 @@
 
 # Political Terror Dashboard
 
-This repository contains the R code and data used to build the **Political Terror Dashboard**, an interactive tool that allows users to explore trends in political terror scores for various countries and regions from 1976 to 2023. The dashboard is based on data from the **Political Terror Scale (PTS)** project, a data collection initiative at the Political Science Department at the University of North Carolina, Asheville.
+This repository contains the R code and data used to build the **Political Terror Dashboard**, an interactive tool that allows users to explore trends in political terror for various countries and regions from 1976 to 2023. The dashboard is based on data from the **Political Terror Scale (PTS)** project, a data collection initiative at the Political Science Department at the University of North Carolina, Asheville.
 
-The dashboard provides users with dynamic visualization options to explore global trends in political terror, with data sourced from **Amnesty International**, **Human Rights Watch**, and the **U.S. Department of State**. Users can customize the time range, select specific countries or regions, and choose between different data sources to gain insights into historical and geographical variations in political terror scores.
+The dashboard provides users with dynamic visualization options to explore global trends in political terror, with data sourced from **Amnesty International**, **Human Rights Watch**, and the **U.S. Department of State**. Users can customize the time range, select specific countries or regions, and choose between different data sources to gain insights into historical and geographical variations in political terror.
 
 
 ## Features
@@ -13,7 +13,7 @@ The dashboard provides users with dynamic visualization options to explore globa
 
 ### Access the App
 
-You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/Trend_Political_Terror/)
+You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/Political_Terror/)
 
 ### Files Included
 
@@ -73,16 +73,6 @@ The codebook, titled `PTS-Codebook-V220`, provides detailed explanations of the 
 
 The codebook can be downloaded from this repository or from the [Political Terror Scale project website](http://www.politicalterrorscale.org/).
 
-
-### Calculation of Average PTS in this Dashboard
-
-The **average political terror score** in this dashboard is calculated by averaging scores from two indicators: **PTS_A** (Amnesty International) and **PTS_S** (U.S. Department of State). The method used for calculating the average PTS is as follows:
-
-1. If both scores (**PTS_A** and **PTS_S**) are available, the average is calculated using these two scores.
-2. If only one score (**PTS_A** or **PTS_S**) is available, that score is used as the PTS.
-3. If neither score is available, the PTS is set to `NA`.
-
-This method ensures that the average is dynamically calculated based on the availability of data from **Amnesty International** and the **U.S. Department of State**, handling missing values appropriately.
 
 ### Instructions
 
