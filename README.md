@@ -13,7 +13,7 @@ The dashboard provides users with dynamic visualization options to explore globa
 
 ### Access the App
 
-You can access the app here: [Political Terror Scale App](https://mohsnmonji.shinyapps.io/Political_Terror/)
+You can access the app here: [Political Terror Dashboard App](https://mohsnmonji.shinyapps.io/Political_Terror/)
 
 ### Files Included
 
