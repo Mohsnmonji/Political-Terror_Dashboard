@@ -1,15 +1,29 @@
+library(shinycssloaders)
 library(shiny)
 library(dplyr)
+library(plotly)
 library(ggplot2)
 
 # Load the dataset (ensure it's in the correct directory as your Shiny app)
+
 pts_data <- read.csv("PTS-2024.csv", 
                      fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
 
-# Clean the data
+# Clean and preprocess data
 pts_data_clean <- pts_data %>%
   mutate(Year = as.numeric(as.character(Year))) %>%
   filter(!is.na(Year))
+
+# Define region labels
+region_labels <- c(
+  "eap" = "East Asia and Pacific",
+  "eca" = "Europe and Central Asia",
+  "lac" = "Latin America and the Caribbean",
+  "mena" = "Middle East and North Africa",
+  "na" = "North America",
+  "sa" = "South Asia",
+  "ssa" = "Sub-Saharan Africa"
+)
 
 # Calculate average PTS dynamically based on available PTS_A and PTS_S values
 pts_data_clean <- pts_data_clean %>%
@@ -36,35 +50,26 @@ top_20_countries <- average_pts_over_time %>%
 country_list <- unique(pts_data_clean$Country)
 region_list <- unique(pts_data_clean$Region)
 
-# Mapping of region codes to region names
-region_labels <- c(
-  "eap" = "East Asia and Pacific",
-  "eca" = "Europe and Central Asia",
-  "lac" = "Latin America and the Caribbean",
-  "mena" = "Middle East and North Africa",
-  "na" = "North America",
-  "sa" = "South Asia",
-  "ssa" = "Sub-Saharan Africa"
-)
-
 # Define UI for the Shiny app
 ui <- fluidPage(
-  titlePanel("Trends in Political Terror (1976-2023)"),
+  titlePanel(div(class = "fade-in-text", "Trend in Political Terror")),
   
   tags$head(
     tags$style(HTML("
       .fade-in-text {
         opacity: 0;
         animation: fadeIn 5s forwards;
+      
+        font-size: 16px;
       }
       @keyframes fadeIn {
         0% { opacity: 0; }
         100% { opacity: 1; }
       }
       .footer {
-        margin-top: 20px;
+        margin-top: 16px;
         color: gray;
-        font-size: 14px;
+        font-size: 16px;
         text-align: center;
       }
     "))
@@ -75,7 +80,7 @@ ui <- fluidPage(
            div(class = "fade-in-text",
                HTML("<p>
           The Political Terror Scale (PTS) measures violations of physical integrity rights carried out by states or their agents. 
-          The scale ranges from 0 to 5, with higher scores indicating more severe violations. 
+          The scale ranges from 1 to 5, with higher scores indicating more severe violations. 
           Reports are based on annual assessments from Amnesty International, Human Rights Watch, and the US Department of State. 
           The PTS dataset covers over 200 countries or territories and 7 regions from 1976 to 2023. 
           For more information, see: 
@@ -92,12 +97,12 @@ ui <- fluidPage(
       
       conditionalPanel(
         condition = "input.trend_type == 'Country'",
-        selectInput("country", "Select Country:", choices = NULL)  # Populated in server
+        selectInput("country", "Select Country:", choices = sort(unique(pts_data_clean$Country)))  # Populate with countries
       ),
       
       conditionalPanel(
         condition = "input.trend_type == 'Region'",
-        selectInput("region", "Select Region:", choices = NULL)  # Populated in server
+        selectInput("region", "Select Region:", choices = setNames(names(region_labels), region_labels))  # Display region labels
       ),
       
       selectInput("pts_type", "Select PTS Type:", 
@@ -107,12 +112,16 @@ ui <- fluidPage(
                               "PTS_S: US Department of State" = "PTS_S"), 
                   selected = "Average_PTS"),
       
-      actionButton("goButton", "Go")
+      sliderInput("year_range", "Select Year Range:",
+                  min = min(pts_data_clean$Year, na.rm = TRUE),
+                  max = max(pts_data_clean$Year, na.rm = TRUE),
+                  value = c(min(pts_data_clean$Year), max(pts_data_clean$Year)),
+                  step = 1, sep = "")
     ),
     
     mainPanel(
-      plotOutput("trendPlot"),
-      plotOutput("topCountriesPlot")
+      plotlyOutput("trendPlot", height = "600px") %>% withSpinner(),  # Main Plot
+      plotOutput("topCountriesPlot")  # Top 20 Countries Plot
     )
   )
 )
@@ -120,88 +129,68 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output, session) {
   
-  # Populate country and region dropdowns
-  updateSelectInput(session, "country", choices = sort(country_list))
-  updateSelectInput(session, "region", choices = setNames(names(region_labels), region_labels))
-  
-  # Filter the dataset based on the selected trend type and PTS type
-  filtered_data <- eventReactive(input$goButton, {
-    
+  # Filter data based on trend type (Global, Region, Country), PTS type, and year range
+  filtered_data <- reactive({
     selected_column <- input$pts_type
     
     if (input$trend_type == "Country") {
       pts_data_clean %>%
         filter(Country == input$country) %>%
-        filter(!is.na(.data[[selected_column]])) %>%
-        select(Year, !!selected_column) %>%
+        filter(Year >= input$year_range[1], Year <= input$year_range[2]) %>%
+        select(Country, Year, !!selected_column) %>%
         rename(PTS = !!selected_column)
       
     } else if (input$trend_type == "Region") {
       pts_data_clean %>%
         filter(Region == input$region) %>%
-        filter(!is.na(.data[[selected_column]])) %>%
+        filter(Year >= input$year_range[1], Year <= input$year_range[2]) %>%
         group_by(Year) %>%
         summarise(PTS = mean(.data[[selected_column]], na.rm = TRUE))
       
     } else {
-      if (input$pts_type == "PTS_H") {
-        # Filter global PTS-H data to start from 2000 onwards
-        pts_data_clean %>%
-          filter(Year >= 2000) %>%
-          group_by(Year) %>%
-          summarise(PTS = mean(.data[[selected_column]], na.rm = TRUE))
-      } else {
-        pts_data_clean %>%
-          group_by(Year) %>%
-          summarise(PTS = mean(.data[[selected_column]], na.rm = TRUE))
-      }
+      pts_data_clean %>%
+        filter(Year >= input$year_range[1], Year <= input$year_range[2]) %>%
+        group_by(Year) %>%
+        summarise(PTS = mean(.data[[selected_column]], na.rm = TRUE))
     }
   })
   
-  # Render the trend plot
-  output$trendPlot <- renderPlot({
+  # Render the interactive trend plot using plotly
+  output$trendPlot <- renderPlotly({
     trend_data <- filtered_data()
     
     if (nrow(trend_data) > 0) {
-      pts_label <- switch(input$pts_type,
-                          "Average_PTS" = "Average PTS",
-                          "PTS_A" = "PTS-A",
-                          "PTS_H" = "PTS-H",
-                          "PTS_S" = "PTS-S")
-      
-      p <- ggplot(trend_data, aes(x = Year, y = PTS)) +
-        geom_line(color = "red", size = 1.2) +
-        geom_point(color = "red", size = 3) +
-        labs(
-          title = ifelse(input$trend_type == "Country", 
-                         paste("Trend in", pts_label, "for", input$country, "(1976-2023)"),
-                         ifelse(input$trend_type == "Region", 
-                                paste("Trend in", pts_label, "in", region_labels[input$region], "Region (1976-2023)"),
-                                paste("Global Trend in", pts_label, "(1976-2023)"))),
-          x = "Year", 
-          y = paste(pts_label, "Score")
-        ) +
-        theme_minimal()
-      
-      # Customize the x-axis scaling
-      if (input$pts_type == "PTS_H") {
-        # For PTS_H, display only from 2000 onwards
-        p <- p + scale_x_continuous(
-          breaks = seq(2000, max(trend_data$Year, na.rm = TRUE), by = 1)
+      # Create the plotly interactive line plot with two decimal points for PTS scores and red color
+      p <- plot_ly(trend_data, 
+                   x = ~Year, 
+                   y = ~round(PTS, 2),  # Keep real values with two decimals
+                   type = 'scatter', 
+                   mode = 'lines+markers',
+                   hoverinfo = 'text',
+                   text = ~paste('Year:', Year, '<br>PTS:', round(PTS, 2)),
+                   line = list(color = 'red'),  # Set line color to red
+                   marker = list(color = 'red')  # Set marker color to red
+      ) %>%
+        layout(
+          title = list(text = "Trend in Political Terror", font = list(size = 12, bold = TRUE, color = 'darkgreen')),  # Set title bold, blue, and size 12
+          xaxis = list(title = "Year"),
+          yaxis = list(
+            title = "PTS Score"
+          ),
+          hovermode = "x unified",  # Unified hover mode
+          margin = list(l = 50, r = 50, t = 100, b = 100),  # Add margins for better layout
+          showlegend = FALSE
         )
-      } else {
-        # Display every 10 years for PTS_A, PTS_S, and Average_PTS
-        p <- p + scale_x_continuous(breaks = seq(min(trend_data$Year, na.rm = TRUE), max(trend_data$Year, na.rm = TRUE), by = 10))
-      }
       
-      print(p)
-      
+      return(p)
     } else {
-      ggplot() + 
-        annotate("text", x = 1, y = 1, label = "No data available for this selection", size = 5, color = "red") +
-        theme_void()
+      ggplotly(ggplot() + 
+                 annotate("text", x = 1, y = 1, label = "No data available for this selection", size = 5, color = "red") +
+                 theme_void())
     }
   })
+  
+  
   
   # Render the Top 20 Countries plot based on Average PTS
   output$topCountriesPlot <- renderPlot({
