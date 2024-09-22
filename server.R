@@ -4,9 +4,6 @@ library(plotly)
 library(ggplot2)
 
 # Load and preprocess the dataset
-pts_data <- read.csv("PTS-2024.csv", 
-                     fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
-
 pts_data_clean <- pts_data %>%
   mutate(Year = as.numeric(as.character(Year))) %>%
   filter(!is.na(Year))
