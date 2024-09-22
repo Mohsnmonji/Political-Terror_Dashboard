@@ -1,14 +1,12 @@
-
-# Load the required libraries
-
-library(shiny)
-library(plotly)
-library(plotly)
 library(shinycssloaders)
+library(shiny)
+library(dplyr)
+library(plotly)
+library(ggplot2)
 
 # Define UI for the Shiny app
-fluidPage(
-  titlePanel(div(class = "fade-in-text", "Trend in Political Terror")),
+ui <- fluidPage(
+  titlePanel(div(class = "fade-in-text", "Trends in Political Terror (1976-2023)")),
   
   tags$head(
     tags$style(HTML("
@@ -52,23 +50,23 @@ fluidPage(
       
       conditionalPanel(
         condition = "input.trend_type == 'Country'",
-        selectInput("country", "Select Country:", choices = NULL)  # To be populated in server
+        selectInput("country", "Select Country:", choices = NULL)  # Will be populated dynamically
       ),
       
       conditionalPanel(
         condition = "input.trend_type == 'Region'",
-        selectInput("region", "Select Region:", choices = NULL)  # To be populated in server
+        selectInput("region", "Select Region:", choices = NULL)  # Will be populated dynamically
       ),
       
       selectInput("pts_type", "Select PTS Type:", 
-                  choices = c("Average" = "Average_PTS", 
-                              "PTS_A: Amnesty International" = "PTS_A", 
-                              "PTS_H: Human Rights Watch" = "PTS_H", 
-                              "PTS_S: US Department of State" = "PTS_S"), 
-                  selected = "Average_PTS"),
+                  choices = c("PTS: Amnesty International" = "PTS_A", 
+                              "PTS: Human Rights Watch" = "PTS_H", 
+                              "PTS: US Department of State" = "PTS_S"), 
+                  selected = "PTS_A"),
       
       sliderInput("year_range", "Select Year Range:",
-                  min = 1976, max = 2023,
+                  min = 1976,
+                  max = 2023,
                   value = c(1976, 2023),
                   step = 1, sep = "")
     ),
