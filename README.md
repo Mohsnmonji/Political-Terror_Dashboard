@@ -83,7 +83,7 @@ This method ensures that the average is dynamically calculated based on the avai
 
 ### Instructions
 
-For instructions on how to run the R code for the app, please refer to the `Instructions.Rmd` or `Instructions.pdf` file in this repository.
+For instructions on how to run the R code for the app, please refer to the `Instructions.Rmd` or `Instructions.pdf` files in this repository.
 
 ### License
 
