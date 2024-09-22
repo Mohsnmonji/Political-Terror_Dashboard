@@ -1,7 +1,10 @@
 
-# Political Terror Scale (PTS) Dashboard
+# Political Terror Dashboard
 
-This repository contains the R code and data used to build the **Political Terror Dashboard**. The dashboard allows users to explore trends in political terror scores for various countries and regions from 1976 to 2023. The app provides an interactive interface to visualize these trends based on the PTS Dataset provided by the Political Terror Scale (PTS) project, a data collection project at the Political Science Department at the University of North Carolina, Asheville.
+This repository contains the R code and data used to build the **Political Terror Dashboard**, an interactive tool that allows users to explore trends in political terror scores for various countries and regions from 1976 to 2023. The dashboard is based on data from the **Political Terror Scale (PTS)** project, a data collection initiative at the Political Science Department at the University of North Carolina, Asheville.
+
+The dashboard provides users with dynamic visualization options to explore global trends in political terror, with data sourced from **Amnesty International**, **Human Rights Watch**, and the **U.S. Department of State**. Users can customize the time range, select specific countries or regions, and choose between different data sources to gain insights into historical and geographical variations in political terror scores.
+
 
 ## Features
 
