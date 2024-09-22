@@ -1,10 +1,11 @@
-library(shiny)
+
+# Load the required libraries
 library(dplyr)
 library(plotly)
 library(ggplot2)
 library(shiny)
-library(plotly)
 library(shinycssloaders)
+
 # Load the dataset (ensure it's in the correct directory as your Shiny app)
 pts_data <- read.csv("PTS-2024.csv", 
                      fileEncoding = "UTF-8-BOM", encoding = "UTF-8")

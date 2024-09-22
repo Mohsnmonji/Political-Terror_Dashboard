@@ -1,8 +1,11 @@
+
+# Load the required libraries
+
 library(shiny)
 library(plotly)
-library(shiny)
 library(plotly)
 library(shinycssloaders)
+
 # Define UI for the Shiny app
 fluidPage(
   titlePanel(div(class = "fade-in-text", "Trend in Political Terror")),
