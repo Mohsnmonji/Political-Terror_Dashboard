@@ -101,7 +101,7 @@ server <- function(input, output, session) {
     }
   })
   
-  # Render the Top 20 Countries plot without median, standard deviation, and average labels
+  # Render the Top 20 Countries plot
   output$topCountriesPlot <- renderPlot({
     # Get the year range from user input
     selected_year_range <- input$year_range
@@ -116,7 +116,7 @@ server <- function(input, output, session) {
       top_n(20, wt = Average_PTS) %>%
       arrange(desc(Average_PTS))
     
-    # Plot with only Average PTS (no additional labels)
+    # Plot with Average PTS-A
     ggplot(top_20_countries, aes(x = reorder(Country, Average_PTS), y = Average_PTS)) +
       geom_bar(stat = "identity", fill = "darkgreen", alpha = 0.8) +
       
