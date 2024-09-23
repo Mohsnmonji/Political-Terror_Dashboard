@@ -11,7 +11,7 @@ The dashboard provides users with dynamic visualization options to explore trend
 
 - **PTS Source Selection**: Users can select from three different political terror indicators computed by the PTS team based on reports by Amnesty International, Human Rights Watch, and the U.S. Department of State.
 
-- **Top 20 Countries by Political Terror Score (PTS-A)**: Users can view the top 20 countries with the highest average Political Terror Score (PTS-A) for a selected year range. The app also displays a dynamic table with detailed statistics for these countries, including the mean, median, and standard deviation of PTS-A values.
+- **Countries with Highest Average Political Terror Score (PTS-A)**: Users can view a list of countries with the highest average Political Terror Score (PTS-A) for any  year range that they select. The app also displays a dynamic table with detailed statistics for these countries, including the mean, median, and standard deviation of PTS-A values over the selected time span.
 
 
 ### Access the App
