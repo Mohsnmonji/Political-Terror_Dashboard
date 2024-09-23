@@ -31,7 +31,7 @@ You can access the app here: [Political Terror Dashboard App](https://mohsnmonji
 
 ### Dataset
 
-The dataset (`PTS-2024.csv`) contains political terror scores for over 200 countries and seven geographic regions from 1976 to 2023. The scores are based on reports by three primary sources and include three indicators of political terror:
+The dataset (`PTS-2024.csv`) contains political terror scores for over 200 countries and seven geographic regions from 1976 to 2023. The scores are computed by the PTS team based on reports by three primary sources and include three indicators of political terror:
 
 - **PTS_A**: Amnesty International
     - [Amnesty International: The State of the World's Human Rights](https://amnesty.ca/reports/2024-annual-global-report/?gad_source=1&gclid=Cj0KCQjw3bm3BhDJARIsAKnHoVX7eatPE_Ipefq3HJ_Lg6RDd6AQm16fAs-oRFjs78dZlGzSltESmscaAuDaEALw_wcB)
