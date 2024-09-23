@@ -60,7 +60,7 @@ concept is also distinguishable from terrorism as a tactic or from criminal acts
 
 ### Access to the PTS dataset 
 
-The PTS dataset is available for download from the [Political Terror Scale project website](http://www.politicalterrorscale.org/). Users can download the latest version of the PTS dataset directly from the website.
+The PTS dataset is available for download from the Political Terror Scale project [website](http://www.politicalterrorscale.org/). Users can download the latest version of the PTS dataset directly from the website.
 
 ### Data Citation
 
