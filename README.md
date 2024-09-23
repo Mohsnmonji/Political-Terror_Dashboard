@@ -9,7 +9,8 @@ The dashboard provides users with dynamic visualization options to explore globa
 ## Features
 
 - **Dynamic Country, Region, and Global Selection**: Users can choose to view trends for specific countries, regions, or global averages.
-- **PTS Source Selection**: Users can select from three different PTS indicators based on reports by Amnesty International, Human Rights Watch,and the U.S. Department of State or view the average PTS score across over the yers.
+
+- **PTS Source Selection**: Users can select from three different PTS indicators based on reports by Amnesty International, Human Rights Watch,and the U.S. Department of State.
 
 ### Access the App
 
@@ -40,8 +41,6 @@ The dataset (`PTS-2024.csv`) contains political terror scores for over 200 count
     - [U.S. Department of State: Country Reports on Human Rights Practices](https://preview.state.gov/reports/2023-country-reports-on-human-rights-practices/)
 
 The PTS team  assign a score ranging from 1 to 5  to each country based on reports from the above-mentioned sources to provide a general measure of political terror in each country.As the PTS project team reminds, it is important to understand political terror as:
-
-Each source assigns a score ranging from 0 to 5 to provide a general measure of political terror in each country. As the PTS project team reminds, it is important to understand political terror as:
 
 > "... violations of basic human rights
 to the physical integrity of the person by agents of the state within the territorial boundaries of the state
