@@ -6,7 +6,7 @@ output:
 
 ```yaml
 ---
-title: "Source Code for the Political Terror Dashboard"
+title: " Instruction for Running R Source Code for the Political Terror Dashboard"
 author: "Mohsen Monji"
 output:
   pdf_document: default
