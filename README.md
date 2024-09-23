@@ -8,7 +8,7 @@ The dashboard provides users with dynamic visualization options to explore globa
 
 ## Features
 
-- **Dynamic Country, Region, and Global Selection**: Users can choose to view trends for specific countries, regions, or global averages.
+- **Dynamic Country, Region, and Global Selection**: Users can choose to view trends for specific countries, regions, or globally.
 
 - **PTS Source Selection**: Users can select from three different political terror indicators computed by the PTS team based on reports by Amnesty International, Human Rights Watch, and the U.S. Department of State.
 
