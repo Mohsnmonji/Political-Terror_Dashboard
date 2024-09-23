@@ -6,7 +6,7 @@ library(ggplot2)
 
 # Define UI for the Shiny app
 ui <- fluidPage(
-  titlePanel(div(class = "fade-in-text", "Trends in Political Terror (1976-2023)")),
+  titlePanel(div(class = "fade-in-text", "Political Terror Dashboard")),
   
   tags$head(
     tags$style(HTML("
@@ -73,7 +73,9 @@ ui <- fluidPage(
     
     mainPanel(
       plotlyOutput("trendPlot", height = "600px") %>% withSpinner(),  # Main Plot
-      plotOutput("topCountriesPlot")  # Top 20 Countries Plot
+      plotOutput("topCountriesPlot"),  # Top 20 Countries Plot
+      h4(textOutput("tableTitle")),  # Dynamic Title for the Table
+      tableOutput("statsTable")  # Dynamic table to display detailed statistics
     )
   )
 )
