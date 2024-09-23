@@ -40,7 +40,7 @@ The dataset (`PTS-2024.csv`) contains political terror scores for over 200 count
 - **PTS_S**: U.S. Department of State
     - [U.S. Department of State: Country Reports on Human Rights Practices](https://preview.state.gov/reports/2023-country-reports-on-human-rights-practices/)
 
-The PTS team  assign a score ranging from 1 to 5  to each country based on reports from the above-mentioned sources to provide a general measure of political terror in each country.As the PTS project team reminds, it is important to understand political terror as:
+The PTS team  assign a score ranging from 1 to 5 to each country based on reports from the above-mentioned sources to provide a general measure of political terror in each country. As the PTS project team reminds, it is important to understand political terror as:
 
 > "... violations of basic human rights
 to the physical integrity of the person by agents of the state within the territorial boundaries of the state
