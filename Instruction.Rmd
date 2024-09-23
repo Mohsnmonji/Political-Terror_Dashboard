@@ -6,7 +6,7 @@ output:
 
 ```yaml
 ---
-title: "Source Code for the PoliticalTerror Dashboard"
+title: "Source Code for the Political Terror Dashboard"
 author: "Mohsen Monji"
 output:
   pdf_document: default
@@ -15,14 +15,14 @@ output:
 
 # Overview
 
-This document provides details on the source code for the Political Terror Dashboard. The purpose of this document is to outline how to access and understand the code. For those interested in exploring the app code or making contributions, follow the steps below.
+This document provides details on the source code for the Political Terror Dashboard. The purpose of this document is to outline how to access and understand the code. For those interested in exploring the code or making contributions, follow the steps below.
 
 ## 1. Access the Source Code
 
-The source code for the PTS Trend Dashboard can be found in the GitHub repository. Clone the repository using the following command:
+The source code for the Political Terror Dashboard can be found in the GitHub repository. Clone the repository using the following command:
 
 ```bash
-git clone https://github.com/Mohsnmonji/Trends-in-Political-Terror-1976-2023-.git
+git clone https://github.com/Mohsnmonji/Political-Terror-Dashboard.git
 ```
 
 This repository contains all necessary files, including the R scripts and data used to build the dashboard.
@@ -49,11 +49,11 @@ The key files in the repository are:
 To modify or explore the app code, set your working directory to the cloned repository and run the app locally in R:
 
 ```r
-setwd("/path/to/Trend-in-Average-Political-Terror-Scale")
+setwd("/path/to/Political-Terror-Dashboard")
 shiny::runApp('PTS_Trend_Code.R')
 ```
 
-Replace `"/path/to/Trend-in-Average-Political-Terror-Scale"` with the actual path to the cloned repository on your machine.
+Replace `"/path/to/Political-Terror-Dashboard"` with the actual path to the cloned repository on your machine.
 
 
 By following these steps, you can access and modify the PTS Trend Dashboard's source code for research, learning, or development purposes.
