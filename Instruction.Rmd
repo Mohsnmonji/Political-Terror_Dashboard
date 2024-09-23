@@ -15,7 +15,7 @@ output:
 
 # Overview
 
-This document provides details on the source code for the Political Terror Dashboard. The purpose of this document is to outline how to access and understand the code. For those interested in exploring the code or making contributions, follow the steps below.
+This document provides instructions on the R source code for the Political Terror Dashboard. The purpose of this document is to outline how to access and understand the code. For those interested in exploring the code or making contributions, follow the steps below.
 
 ## 1. Access the Source Code
 
